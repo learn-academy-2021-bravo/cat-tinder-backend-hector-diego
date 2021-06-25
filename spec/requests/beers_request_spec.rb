@@ -33,4 +33,22 @@ RSpec.describe "Beers", type: :request do
     expect(beer.country).to eq 'Mexico'
   end
 end
+describe 'validates POST/create' do
+  it "doesn't create a beer without a brew" do
+    beer_params = {
+      beer: {
+        brand: 'Corona',
+        country: 'Mexico'
+      }
+    }
+    # Send the request to the  server
+    post '/beers', params: beer_params
+    # expect an error if the cat_params does not have a name
+    expect(response.status).to eq 422
+    # Convert the JSON response into a Ruby Hash
+    json = JSON.parse(response.body)
+    # Errors are returned as an array because there could be more than one, if there are more than one validation failures on an attribute.
+    expect(json['brew']).to include "can't be blank"
+  end
+end
 end

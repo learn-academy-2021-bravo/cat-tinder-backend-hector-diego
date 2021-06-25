@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 2021_06_24_215506) do
 
   create_table "beers", force: :cascade do |t|
     t.string "brand"
+    t.string "brew"
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "brew"
   end
 
 end
